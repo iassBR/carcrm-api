@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\{AuthController, RegisterController};
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +15,7 @@ use App\Http\Controllers\Auth\AuthController;
 |
 */
 
+Route::post('/auth/register', [RegisterController::class, 'store']);
 Route::post('/auth/token', [AuthController::class, 'auth']);
 
 Route::group([
@@ -25,9 +26,4 @@ Route::group([
 
     Route::get('/me', [AuthController::class, 'me']);
     Route::post('/logout', [AuthController::class, 'logout']);
-});
-
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
 });
